@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import { imagePaths } from "./imageCategoryPhonePaths";
-import { catExplore, catBest, catFlash, dataList } from "../data/data";
+import { catExplore, catBest, catFlash, dataList } from "./Data";
 import ProductCard from "@/components/ProductCard";
 
 // export const DataSales = [1, 2, 3, 4, 1, 2, 3, 4].map((id) => (
