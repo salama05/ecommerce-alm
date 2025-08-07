@@ -229,6 +229,16 @@ export const dataList = [
   },
 ];
 
+// Resolve product images at build time to work in production (Vercel)
+const productImages = import.meta.glob("../assets/ProductPhoto/*.png", {
+  eager: true,
+  as: "url",
+});
+
 dataList.forEach((item) => {
-  item.img = `./src/assets/ProductPhoto/${item.title.replace(/\s+/g, " ")}.png`;
+  const targetFile = `${item.title}.png`;
+  const matchedKey = Object.keys(productImages).find((key) =>
+    key.endsWith(`/ProductPhoto/${targetFile}`)
+  );
+  item.img = matchedKey ? productImages[matchedKey] : "";
 });
