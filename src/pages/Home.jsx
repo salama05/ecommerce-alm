@@ -25,7 +25,7 @@ import AdBanner from "@/components/AdBanner";
 import SwiperComp from "@/components/SwiperComp";
 import ProductSection from "@/components/ProductSection";
 import Button from "@/components/Button";
-import { dataList } from "@/data/data";
+import { dataList } from "@/data/Data";
 import CategorySidebar from "@/components/CategorySidebar";
 
 // Placeholders for demo sections
