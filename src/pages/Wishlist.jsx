@@ -1,29 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import GucciImg from "@/assets/ProductPhoto/Gucci.png";
-import CPUCoolerImg from "@/assets/ProductPhoto/RGB liquid CPU Cooler.png";
-import GamepadImg from "@/assets/ProductPhoto/GP Shooter USB Gamepad.png";
-import JacketImg from "@/assets/ProductPhoto/Quilted Satin Jacket.png";
-import LaptopImg from "@/assets/ProductPhoto/ASUS FHD Gaming Laptop.png";
-import MonitorImg from "@/assets/ProductPhoto/IPS LCD Gaming Monitor.png";
-import HavitGamepadImg from "@/assets/ProductPhoto/HAVIT HV-G92 Gamepad.png";
-import KeyboardImg from "@/assets/ProductPhoto/AK-900 Wired Keyboard.png";
-
-const sample = [
-  { id: 1, name: "Gucci duffle bag", price: 960, discount: 35, img: GucciImg },
-  { id: 2, name: "RGB liquid CPU cooler", price: 1960, img: CPUCoolerImg },
-  { id: 3, name: "GP11 Shooter USB Gamepad", price: 550, img: GamepadImg },
-  { id: 4, name: "Quilted Satin Jacket", price: 750, img: JacketImg },
-];
-
-const justForYouProducts = [
-  { id: 5, name: "ASUS FHD Gaming Laptop", price: 960, originalPrice: 1160, discount: 30, img: LaptopImg },
-  { id: 6, name: "IPS LCD Gaming Monitor", price: 1160, img: MonitorImg },
-  { id: 7, name: "HAVIT HV-G92 Gamepad", price: 560, img: HavitGamepadImg },
-  { id: 8, name: "AK-900 Wired Keyboard", price: 200, img: KeyboardImg },
-];
+import { useWishlist } from "@/context/WishlistContext";
+import { useCart } from "@/context/CartContext";
+import { dataList } from "@/data/Data";
+import { useToast } from "@/context/ToastContext";
 
 const Wishlist = () => {
+  const { items, removeItem, clear } = useWishlist();
+  const { addItem } = useCart();
+  const { showToast } = useToast();
+
+  const wantedTitles = [
+    "ASUS FHD Gaming Laptop",
+    "HAVIT HV-G92 Gamepad",
+    "AK-900 Wired Keyboard",
+    "IPS LCD Gaming Monitor",
+  ];
+  const suggestions = wantedTitles
+    .map((title) => dataList.find((d) => d.title === title))
+    .filter(Boolean);
   return (
     <div className="mb-24 mt-8 space-y-16">
       {/* Breadcrumb */}
@@ -32,7 +27,7 @@ const Wishlist = () => {
       </div>
 
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">Wishlist ({sample.length})</h2>
+        <h2 className="text-xl font-semibold">Wishlist ({items.length})</h2>
         <button 
           type="button"
           className="rounded-md border px-4 py-2 text-sm hover:bg-gray-100"
@@ -50,21 +45,27 @@ const Wishlist = () => {
             height: '40px',
             lineHeight: '24px'
           }}
+          onClick={() => {
+            items.forEach((p) => addItem({ id: p.id, name: p.name, price: p.price, img: p.img }, 1));
+            clear();
+            showToast('Moved all wishlist items to cart', { type: 'success' });
+          }}
         >
-          Move All To Bag
+          Move All To Cart
         </button>
       </div>
 
       {/* Wishlist horizontal row */}
       <div className="flex gap-6 overflow-x-auto pb-4">
-        {sample.map((p) => (
-          <div key={p.id} className="flex-shrink-0 w-64 space-y-2">
+        {items.map((p) => (
+          <div key={p.id} className="group flex-shrink-0 w-64 space-y-2">
             <div className="relative">
-              {p.discount && (
-                <div className="absolute top-2 left-2 z-10 bg-red-500 text-white text-xs px-2 py-1 rounded">
-                  -{p.discount}%
-                </div>
-              )}
+              <button
+                onClick={() => removeItem(p.id)}
+                className="absolute top-2 right-2 z-10 text-xs text-gray-600 hover:text-black opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                Remove
+              </button>
               <Link to={`/product/${p.id}`}>
                 <img src={p.img} alt={p.name} className="w-full h-48 rounded-md object-cover" />
               </Link>
@@ -88,6 +89,10 @@ const Wishlist = () => {
                 height: '36px',
                 marginTop: '8px'
               }}
+              onClick={() => {
+                addItem({ id: p.id, name: p.name, price: p.price, img: p.img }, 1);
+                showToast('Added to cart', { type: 'success' });
+              }}
             >
               Add To Cart
             </button>
@@ -95,72 +100,36 @@ const Wishlist = () => {
         ))}
       </div>
 
-      {/* Just For You */}
+      {/* Just For You (dynamic suggestions) */}
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-red-500">Just For You</h3>
-          <button 
-            type="button"
-            className="px-4 py-2 border border-red-500 text-red-500 rounded text-sm hover:bg-red-50 transition-colors"
-            style={{
-              backgroundColor: 'white',
-              color: '#ef4444',
-              padding: '8px 16px',
-              borderRadius: '6px',
-              border: '1px solid #ef4444',
-              fontSize: '14px',
-              cursor: 'pointer',
-              display: 'inline-block',
-              textAlign: 'center',
-              minWidth: '80px',
-              height: '40px',
-              lineHeight: '24px'
-            }}
-          >
-            See All
-          </button>
+          <div className="flex items-center gap-3">
+            <span className="inline-block w-2 h-8 bg-color-button-2 rounded-sm"></span>
+            <h3 className="font-inter text-3xl ov-800:text-4xl font-semibold text-gray-900">Just For You</h3>
+          </div>
         </div>
         <div className="flex gap-6 overflow-x-auto pb-4">
-          {justForYouProducts.map((product) => (
-            <div key={product.id} className="flex-shrink-0 w-64 space-y-2">
-              {/* Discount Badge */}
-              <div className="relative">
-                {product.discount && (
-                  <div className="absolute top-2 left-2 z-10 bg-red-500 text-white text-xs px-2 py-1 rounded">
-                    -{product.discount}%
-                  </div>
-                )}
-                <Link to={`/product/${product.id}`}>
-                  <img src={product.img} alt={product.name} className="w-full h-48 rounded-md object-cover" />
-                </Link>
+          {suggestions.map((it) => (
+            <div key={it.id} className="group cursor-pointer w-64 flex-shrink-0">
+              <div className="relative bg-gray-50 rounded-lg p-4 mb-4">
+                <img src={it.img} alt={it.title} className="w-full h-40 object-contain mb-4" />
+                <button
+                  onClick={() => {
+                    addItem({ id: it.id, name: it.title, price: it.priceNow, img: it.img }, 1);
+                    showToast('Added to cart', { type: 'success' });
+                  }}
+                  className="w-full bg-black text-white py-2 rounded opacity-0 group-hover:opacity-100 transition-opacity"
+                >
+                  Add To Cart
+                </button>
               </div>
-              <p className="truncate text-sm font-medium">{product.name}</p>
-              <div className="flex items-center gap-2">
-                <span className="text-red-500 font-semibold text-sm">${product.price}</span>
-                {product.originalPrice && (
-                  <span className="text-gray-400 line-through text-xs">${product.originalPrice}</span>
-                )}
+              <h4 className="font-medium text-gray-900 mb-2 truncate">{it.title}</h4>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-red-500 font-medium">${it.priceNow}</span>
+                {it.priceOld ? (
+                  <span className="text-gray-400 line-through text-sm">${it.priceOld}</span>
+                ) : null}
               </div>
-              <button 
-                type="button"
-                className="mt-2 w-full rounded-md bg-black py-2 text-sm text-white hover:bg-gray-800 transition-colors"
-                style={{
-                  backgroundColor: '#000000',
-                  color: 'white',
-                  padding: '8px 16px',
-                  borderRadius: '6px',
-                  border: 'none',
-                  fontSize: '14px',
-                  cursor: 'pointer',
-                  display: 'block',
-                  textAlign: 'center',
-                  width: '100%',
-                  height: '36px',
-                  marginTop: '8px'
-                }}
-              >
-                Add To Cart
-              </button>
             </div>
           ))}
         </div>

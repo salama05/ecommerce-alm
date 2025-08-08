@@ -37,8 +37,8 @@ const Placeholder = ({ title, height = 200 }) => (
 
 const SectionTitle = ({ children }) => (
   <div className="flex items-center gap-3 mb-4">
-    <span className="inline-block w-2 h-8 bg-red-500 rounded-sm"></span>
-    <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">{children}</h2>
+    <span className="inline-block w-2 h-8 bg-color-button-2 rounded-sm"></span>
+    <h2 className="font-inter text-3xl ov-800:text-4xl font-semibold text-gray-900">{children}</h2>
   </div>
 );
 
@@ -110,12 +110,14 @@ const Home = () => {
     <div className="flex flex-col gap-12 mt-8">
       {/* Hero Section with Sidebar and Slider */}
       <div className="container mx-auto px-4">
-        <div className="flex gap-6">
-          <CategorySidebar />
-          <div className="flex-1 relative">
+        <div className="flex gap-6 sm-1000:flex-col">
+          <div className="sm-1000:order-2">
+            <CategorySidebar />
+          </div>
+          <div className="flex-1 relative sm-1000:order-1">
             <div className="relative bg-black text-white rounded-lg overflow-hidden">
               {/* Slider Container */}
-              <div className="relative h-64 md:h-80 lg:h-96">
+              <div className="relative h-72 ov-1000:h-96">
                 {heroSlides.map((slide, index) => (
                   <div
                     key={index}
@@ -124,15 +126,15 @@ const Home = () => {
                       index < currentSlide ? '-translate-x-full' : 'translate-x-full'
                     }`}
                   >
-                    <div className="flex flex-col md:flex-row h-full">
+                    <div className="flex h-full">
                       {/* Left side - Text content */}
-                      <div className="flex-1 flex items-center p-6 md:p-12">
+                      <div className="flex-1 flex items-center p-12">
                         <div className="animate-fadeIn">
                           <div className="flex items-center gap-4 mb-6">
                             <img src={slide.logo} alt="Apple" className="w-8 h-8 filter invert" />
                             <span className="text-lg">{slide.title}</span>
                           </div>
-                          <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight whitespace-pre-line">
+                          <h1 className="text-5xl font-bold mb-6 leading-tight whitespace-pre-line">
                             {slide.heading}
                           </h1>
                           <div className="flex items-center gap-2 cursor-pointer hover:text-gray-300 transition-colors">
@@ -145,17 +147,34 @@ const Home = () => {
                       </div>
                       
                       {/* Right side - Phone image */}
-                      <div className="flex-1 relative h-48 md:h-auto">
+                      <div className="flex-1 relative">
                         <img 
                           src={slide.image} 
                           alt={slide.title} 
-                          className="w-full h-full object-contain transition-transform duration-700 hover:scale-105"
+                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                         />
                       </div>
                     </div>
                   </div>
                 ))}
               </div>
+              {/* Slider Arrows */}
+              <button
+                type="button"
+                aria-label="Previous slide"
+                onClick={() => setCurrentSlide(prev => (prev - 1 + heroSlides.length) % heroSlides.length)}
+                className="absolute z-20 top-1/2 left-4 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-black flex items-center justify-center shadow transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"/></svg>
+              </button>
+              <button
+                type="button"
+                aria-label="Next slide"
+                onClick={() => setCurrentSlide(prev => (prev + 1) % heroSlides.length)}
+                className="absolute z-20 top-1/2 right-4 -translate-y-1/2 w-10 h-10 rounded-full bg-white/90 hover:bg-white text-black flex items-center justify-center shadow transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"/></svg>
+              </button>
               
               {/* Slider Indicators - Bottom Center */}
               <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3">
@@ -163,9 +182,9 @@ const Home = () => {
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 border-2 ${
+                    className={`w-4 h-4 rounded-full transition-all duration-300 border-2 ${
                       index === currentSlide 
-                        ? 'bg-red-500 border-red-500 scale-110' 
+                        ? 'bg-color-button-2 border-black scale-110' 
                         : 'bg-transparent border-white hover:bg-white hover:bg-opacity-30'
                     }`}
                   />
@@ -177,7 +196,7 @@ const Home = () => {
       </div>
       {/* Flash Sales Section */}
       <section className="container mx-auto px-4">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 mb-4">
+        <div className="flex items-center gap-8 mb-4">
           <SectionTitle>Flash Sales</SectionTitle>
           <FlashSaleTimer />
         </div>
@@ -191,7 +210,7 @@ const Home = () => {
       {/* Browse By Category */}
       <section className="container mx-auto px-4">
         <SectionTitle>Browse By Category</SectionTitle>
-        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+        <div className="grid grid-cols-6 gap-4">
           {[
             { name: "Phones", image: PhonesImg },
             { name: "Computers", image: ComputersImg },
@@ -202,13 +221,14 @@ const Home = () => {
           ].map((category, index) => (
             <div 
               key={index} 
-              className="group border border-gray-200 rounded-lg p-6 text-center hover:bg-red-500 hover:text-white hover:border-red-500 transition-all duration-300 cursor-pointer"
+              className="group border border-gray-200 rounded-lg p-6 text-center bg-white hover:bg-color-button-2 hover:text-white hover:border-color-button-2 transition-colors duration-300 cursor-pointer"
             >
               <div className="flex items-center justify-center mb-4 h-16">
                 <img 
                   src={category.image} 
                   alt={category.name} 
-                  className="max-w-full max-h-full object-contain group-hover:brightness-0 group-hover:invert transition-all duration-300"
+                  loading="lazy"
+                  className="max-w-full max-h-full object-contain transition-all duration-300"
                 />
               </div>
               <div className="font-medium text-sm">{category.name}</div>
@@ -232,6 +252,7 @@ const Home = () => {
           <img 
             src={Banner} 
             alt="Promotional Banner" 
+            loading="lazy"
             className="w-full h-auto object-cover"
             style={{
               imageRendering: 'crisp-edges',
@@ -255,9 +276,9 @@ const Home = () => {
       {/* New Arrival */}
       <section className="container mx-auto px-4">
         <SectionTitle>New Arrival</SectionTitle>
-        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 lg:h-96">
+        <div className="flex gap-8 h-96">
           {/* PlayStation 5 - Left Side */}
-          <div className="flex-1 bg-black text-white rounded-lg p-6 lg:p-8 relative overflow-hidden min-h-64">
+          <div className="flex-1 bg-black text-white rounded-lg p-8 relative overflow-hidden">
             <div className="relative z-10 h-full flex flex-col justify-end">
               <h3 className="text-3xl font-bold mb-4">PlayStation 5</h3>
               <p className="text-gray-300 mb-6 text-lg">Black and White version of the PS5 coming out on sale.</p>
@@ -266,14 +287,14 @@ const Home = () => {
               </button>
             </div>
             <div className="absolute right-0 top-0 h-full w-1/2">
-              <img src={PlayStation} alt="PlayStation 5" className="w-full h-full object-contain opacity-90" />
+              <img src={PlayStation} alt="PlayStation 5" loading="lazy" className="w-full h-full object-contain opacity-90" />
             </div>
           </div>
 
           {/* Right Side - Three cards */}
           <div className="flex-1 space-y-4">
             {/* Women's Collections - Top */}
-            <div className="bg-black text-white rounded-lg p-6 relative overflow-hidden h-40 sm:h-44">
+            <div className="bg-black text-white rounded-lg p-6 relative overflow-hidden h-44">
               <div className="relative z-10 h-full flex flex-col justify-end">
                 <h3 className="text-xl font-bold mb-2">Women's Collections</h3>
                 <p className="text-gray-300 text-sm mb-2">Featured woman collections that give you another vibe.</p>
@@ -286,7 +307,7 @@ const Home = () => {
             </div>
 
             {/* Bottom Row - Two cards side by side */}
-            <div className="grid grid-cols-2 gap-4 h-40 sm:h-44">
+            <div className="grid grid-cols-2 gap-4 h-44">
               <div className="bg-black text-white rounded-lg p-4 relative overflow-hidden">
                 <div className="relative z-10 h-full flex flex-col justify-end">
                   <h3 className="font-bold mb-1">Speakers</h3>
@@ -296,7 +317,7 @@ const Home = () => {
                   </button>
                 </div>
                 <div className="absolute right-0 top-0 h-full w-2/3">
-                  <img src={SpeakerAmazon} alt="Speakers" className="w-full h-full object-contain opacity-80" />
+                  <img src={SpeakerAmazon} alt="Speakers" loading="lazy" className="w-full h-full object-contain opacity-80" />
                 </div>
               </div>
 
@@ -309,7 +330,7 @@ const Home = () => {
                   </button>
                 </div>
                 <div className="absolute right-0 top-0 h-full w-2/3">
-                  <img src={Gucci1} alt="Perfume" className="w-full h-full object-contain opacity-80" />
+                  <img src={Gucci1} alt="Perfume" loading="lazy" className="w-full h-full object-contain opacity-80" />
                 </div>
               </div>
             </div>
@@ -319,7 +340,7 @@ const Home = () => {
 
       {/* مميزات الخدمة */}
       <section className="container mx-auto px-4 mb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
+        <div className="grid grid-cols-3 gap-8 text-center">
           {/* Free and Fast Delivery */}
           <div className="flex flex-col items-center">
             <div className="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center mb-6 relative">

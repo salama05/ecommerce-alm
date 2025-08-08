@@ -1,43 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoTrashOutline } from "react-icons/io5";
-import HavitGamepadImg from "@/assets/ProductPhoto/HAVIT HV-G92 Gamepad.png";
-import MonitorImg from "@/assets/ProductPhoto/IPS LCD Gaming Monitor.png";
-
-const initialItems = [
-  {
-    id: 1,
-    name: "IPS LCD Gaming Monitor",
-    price: 650,
-    qty: 1,
-    img: MonitorImg,
-  },
-  {
-    id: 2,
-    name: "HAVIT HV-G92 Gamepad",
-    price: 550,
-    qty: 2,
-    img: HavitGamepadImg,
-  },
-];
+import { useCart } from "@/context/CartContext";
 
 const Cart = () => {
-  const [items, setItems] = useState(initialItems);
+  const { items, updateQty, removeItem, subtotal, total } = useCart();
   const [coupon, setCoupon] = useState("");
-
-  const updateQty = (id, qty) => {
-    setItems((prev) =>
-      prev.map((it) => (it.id === id ? { ...it, qty: Number(qty) } : it))
-    );
-  };
-
-  const removeItem = (id) => {
-    setItems((prev) => prev.filter((it) => it.id !== id));
-  };
-
-  const subtotal = items.reduce((acc, it) => acc + it.price * it.qty, 0);
-  const shipping = subtotal > 0 ? 0 : 0;
-  const total = subtotal + shipping;
+  const shipping = 0;
 
   return (
     <div className="my-12 space-y-10">

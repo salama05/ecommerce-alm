@@ -3,10 +3,16 @@ import { FaRegHeart } from "react-icons/fa";
 import { FiEye } from "react-icons/fi";
 import ColorBtn from "./ColorBtn";
 import { TiStarFullOutline } from "react-icons/ti";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
+import { useToast } from "@/context/ToastContext";
 function ProductCard({ item, sectionTitle }) {
+  const { addItem } = useCart();
+  const { addItem: addWishlistItem, removeItem: removeWishlistItem, isInWishlist } = useWishlist();
+  const { showToast } = useToast();
   return (
-    <div className="border-slate-950 relative w-full rounded-lg border shadow-lg">
-      <div className="flex h-40 sm:h-48 md:h-[250px] items-center justify-center bg-[#F5F5F5]">
+    <div className="group border-slate-950 relative mx-auto w-full max-w-[270px] rounded-lg border shadow-lg overflow-hidden">
+      <div className="flex h-[250px] items-center justify-center bg-[#F5F5F5] relative">
         {/* Discount Badge */}
         {item.saleShow && (
           <div className="absolute left-3 top-3 h-[26px] w-[55px] rounded bg-color-button-2 px-2 py-1 text-center font-poppins text-font-sm-400 text-white">
@@ -24,18 +30,44 @@ function ProductCard({ item, sectionTitle }) {
         {/* Image */}
         <img
           src={item.img}
-          alt={item.title}
-          className="h-32 sm:h-40 md:h-[180px] w-auto max-w-full object-contain"
+          alt="HAVIT HV-G92 Gamepad"
+          className="h-[180px] w-[190px] object-cover"
         />
 
         {/* Wishlist and View Icons */}
         <div className="absolute right-3 top-3 flex flex-col justify-center gap-2">
-          <button className="flex h-[34px] w-[34px] items-center justify-center">
+          <button
+            aria-label="Toggle wishlist"
+            onClick={() =>
+              isInWishlist(item.id)
+                ? (removeWishlistItem(item.id), showToast('Removed from wishlist', { type: 'warning' }))
+                : (addWishlistItem({ id: item.id, title: item.title, price: item.priceNow, img: item.img }), showToast('Added to wishlist', { type: 'success' }))
+            }
+            className={`flex h-[34px] w-[34px] items-center justify-center ${
+              isInWishlist(item.id) ? 'text-red-500' : ''
+            }`}
+          >
             <FaRegHeart />
           </button>
           <button className="flex h-[34px] w-[34px] items-center justify-center">
             <FiEye />
           </button>
+        </div>
+
+        {/* Add to Cart appears on hover */}
+        <div className="absolute inset-x-0 bottom-0 transform translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-all duration-200">
+          <div className="p-3">
+            <button
+              type="button"
+              onClick={() => {
+                addItem({ id: item.id, title: item.title, price: item.priceNow, img: item.img }, 1);
+                showToast('Added to cart', { type: 'success' });
+              }}
+              className="w-full rounded bg-color-button-2 text-white py-2 transition-colors hover:bg-black"
+            >
+              Add to Cart
+            </button>
+          </div>
         </div>
       </div>
 
@@ -89,6 +121,7 @@ function ProductCard({ item, sectionTitle }) {
           </div>
         </div>
       </div>
+      
       {item.colorShow && (
         <div className="mt-2">
           <ColorBtn />

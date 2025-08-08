@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useCart } from "@/context/CartContext";
+import { useToast } from "@/context/ToastContext";
 
 // In real app this would fetch by ID
 const dummy = {
@@ -75,6 +77,8 @@ const Product = () => {
   const [selectedColor, setSelectedColor] = useState(0);
   const [selectedSize, setSelectedSize] = useState(2); // M size
   const [quantity, setQuantity] = useState(1);
+  const { addItem } = useCart();
+  const { showToast } = useToast();
 
   const renderStars = (rating) => {
     return Array.from({ length: 5 }, (_, i) => (
@@ -95,9 +99,9 @@ const Product = () => {
         <span className="text-gray-900">{product.name}</span>
       </div>
 
-      <div className="flex flex-row gap-16 items-start">
+      <div className="flex flex-col ov-1000:flex-row gap-8 ov-1000:gap-16 items-start">
         {/* Gallery */}
-        <div className="w-1/2 flex gap-6">
+        <div className="w-full ov-1000:w-1/2 flex gap-4 ov-1000:gap-6">
           {/* Thumbnail Images */}
           <div className="flex flex-col gap-4">
             {product.images.map((src, i) => (
@@ -106,7 +110,7 @@ const Product = () => {
                 src={src} 
                 alt={`thumb ${i + 1}`} 
                 className={`w-20 h-20 rounded-md cursor-pointer border-2 object-cover ${
-                  selectedImage === i ? 'border-red-500' : 'border-gray-200'
+                  selectedImage === i ? 'border-black' : 'border-gray-200'
                 }`}
                 onClick={() => setSelectedImage(i)}
               />
@@ -117,13 +121,13 @@ const Product = () => {
             <img 
               src={product.images[selectedImage]} 
               alt={product.name} 
-              className="w-full h-[500px] rounded-md object-cover bg-gray-50" 
+              className="w-full h-[320px] ov-800:h-[420px] ov-1000:h-[500px] rounded-md object-cover bg-gray-50" 
             />
           </div>
         </div>
 
         {/* Product Info */}
-        <div className="w-1/2 space-y-6">
+        <div className="w-full ov-1000:w-1/2 space-y-6">
           <h1 className="text-3xl font-semibold text-gray-900">{product.name}</h1>
           
           {/* Rating and Reviews */}
@@ -171,7 +175,7 @@ const Product = () => {
                     key={i}
                     className={`px-3 py-1 border rounded text-sm ${
                       selectedSize === i 
-                        ? 'border-red-500 bg-red-500 text-white' 
+                        ? 'border-black bg-black text-white' 
                         : 'border-gray-300 text-gray-700 hover:border-gray-400'
                     }`}
                     onClick={() => setSelectedSize(i)}
@@ -206,6 +210,10 @@ const Product = () => {
 
             {/* Buy Now Button */}
             <button 
+              onClick={() => {
+                addItem({ id: product.id, name: product.name, price: product.price, img: product.images[0] }, quantity);
+                showToast('Added to cart', { type: 'success' });
+              }}
               className="bg-red-500 hover:bg-red-600 text-white px-8 py-2 rounded transition-colors"
               style={{
                 backgroundColor: '#ef4444',
@@ -218,7 +226,7 @@ const Product = () => {
                 cursor: 'pointer'
               }}
             >
-              Buy Now
+              Add to Cart
             </button>
 
             {/* Wishlist Button */}
