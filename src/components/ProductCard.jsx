@@ -5,8 +5,8 @@ import ColorBtn from "./ColorBtn";
 import { TiStarFullOutline } from "react-icons/ti";
 function ProductCard({ item, sectionTitle }) {
   return (
-    <div className="border-slate-950 relative mx-auto w-[270px] rounded-lg border shadow-lg">
-      <div className="flex h-[250px] items-center justify-center bg-[#F5F5F5]">
+    <div className="border-slate-950 relative w-full rounded-lg border shadow-lg">
+      <div className="flex h-40 sm:h-48 md:h-[250px] items-center justify-center bg-[#F5F5F5]">
         {/* Discount Badge */}
         {item.saleShow && (
           <div className="absolute left-3 top-3 h-[26px] w-[55px] rounded bg-color-button-2 px-2 py-1 text-center font-poppins text-font-sm-400 text-white">
@@ -24,8 +24,8 @@ function ProductCard({ item, sectionTitle }) {
         {/* Image */}
         <img
           src={item.img}
-          alt="HAVIT HV-G92 Gamepad"
-          className="h-[180px] w-[190px] object-cover"
+          alt={item.title}
+          className="h-32 sm:h-40 md:h-[180px] w-auto max-w-full object-contain"
         />
 
         {/* Wishlist and View Icons */}

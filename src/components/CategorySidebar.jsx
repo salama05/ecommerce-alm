@@ -13,7 +13,7 @@ const categories = [
 ];
 
 const CategorySidebar = () => (
-  <aside className="flex flex-col gap-2 bg-white rounded-lg shadow p-4 min-w-[220px]">
+  <aside className="hidden md:flex flex-col gap-2 bg-white rounded-lg shadow p-4 min-w-[220px]">
     {categories.map((cat, idx) => (
       <button
         key={idx}

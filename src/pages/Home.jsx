@@ -38,7 +38,7 @@ const Placeholder = ({ title, height = 200 }) => (
 const SectionTitle = ({ children }) => (
   <div className="flex items-center gap-3 mb-4">
     <span className="inline-block w-2 h-8 bg-red-500 rounded-sm"></span>
-    <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">{children}</h2>
+    <h2 className="text-2xl md:text-3xl font-extrabold text-gray-900 tracking-tight">{children}</h2>
   </div>
 );
 
@@ -115,7 +115,7 @@ const Home = () => {
           <div className="flex-1 relative">
             <div className="relative bg-black text-white rounded-lg overflow-hidden">
               {/* Slider Container */}
-              <div className="relative h-96">
+              <div className="relative h-64 md:h-80 lg:h-96">
                 {heroSlides.map((slide, index) => (
                   <div
                     key={index}
@@ -124,15 +124,15 @@ const Home = () => {
                       index < currentSlide ? '-translate-x-full' : 'translate-x-full'
                     }`}
                   >
-                    <div className="flex h-full">
+                    <div className="flex flex-col md:flex-row h-full">
                       {/* Left side - Text content */}
-                      <div className="flex-1 flex items-center p-12">
+                      <div className="flex-1 flex items-center p-6 md:p-12">
                         <div className="animate-fadeIn">
                           <div className="flex items-center gap-4 mb-6">
                             <img src={slide.logo} alt="Apple" className="w-8 h-8 filter invert" />
                             <span className="text-lg">{slide.title}</span>
                           </div>
-                          <h1 className="text-5xl font-bold mb-6 leading-tight whitespace-pre-line">
+                          <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight whitespace-pre-line">
                             {slide.heading}
                           </h1>
                           <div className="flex items-center gap-2 cursor-pointer hover:text-gray-300 transition-colors">
@@ -145,11 +145,11 @@ const Home = () => {
                       </div>
                       
                       {/* Right side - Phone image */}
-                      <div className="flex-1 relative">
+                      <div className="flex-1 relative h-48 md:h-auto">
                         <img 
                           src={slide.image} 
                           alt={slide.title} 
-                          className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                          className="w-full h-full object-contain transition-transform duration-700 hover:scale-105"
                         />
                       </div>
                     </div>
@@ -163,7 +163,7 @@ const Home = () => {
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`w-4 h-4 rounded-full transition-all duration-300 border-2 ${
+                    className={`w-3 h-3 md:w-4 md:h-4 rounded-full transition-all duration-300 border-2 ${
                       index === currentSlide 
                         ? 'bg-red-500 border-red-500 scale-110' 
                         : 'bg-transparent border-white hover:bg-white hover:bg-opacity-30'
@@ -177,7 +177,7 @@ const Home = () => {
       </div>
       {/* Flash Sales Section */}
       <section className="container mx-auto px-4">
-        <div className="flex items-center gap-8 mb-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 mb-4">
           <SectionTitle>Flash Sales</SectionTitle>
           <FlashSaleTimer />
         </div>
@@ -191,7 +191,7 @@ const Home = () => {
       {/* Browse By Category */}
       <section className="container mx-auto px-4">
         <SectionTitle>Browse By Category</SectionTitle>
-        <div className="grid grid-cols-6 gap-4">
+        <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
           {[
             { name: "Phones", image: PhonesImg },
             { name: "Computers", image: ComputersImg },
@@ -255,9 +255,9 @@ const Home = () => {
       {/* New Arrival */}
       <section className="container mx-auto px-4">
         <SectionTitle>New Arrival</SectionTitle>
-        <div className="flex gap-8 h-96">
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 lg:h-96">
           {/* PlayStation 5 - Left Side */}
-          <div className="flex-1 bg-black text-white rounded-lg p-8 relative overflow-hidden">
+          <div className="flex-1 bg-black text-white rounded-lg p-6 lg:p-8 relative overflow-hidden min-h-64">
             <div className="relative z-10 h-full flex flex-col justify-end">
               <h3 className="text-3xl font-bold mb-4">PlayStation 5</h3>
               <p className="text-gray-300 mb-6 text-lg">Black and White version of the PS5 coming out on sale.</p>
@@ -273,7 +273,7 @@ const Home = () => {
           {/* Right Side - Three cards */}
           <div className="flex-1 space-y-4">
             {/* Women's Collections - Top */}
-            <div className="bg-black text-white rounded-lg p-6 relative overflow-hidden h-44">
+            <div className="bg-black text-white rounded-lg p-6 relative overflow-hidden h-40 sm:h-44">
               <div className="relative z-10 h-full flex flex-col justify-end">
                 <h3 className="text-xl font-bold mb-2">Women's Collections</h3>
                 <p className="text-gray-300 text-sm mb-2">Featured woman collections that give you another vibe.</p>
@@ -286,7 +286,7 @@ const Home = () => {
             </div>
 
             {/* Bottom Row - Two cards side by side */}
-            <div className="grid grid-cols-2 gap-4 h-44">
+            <div className="grid grid-cols-2 gap-4 h-40 sm:h-44">
               <div className="bg-black text-white rounded-lg p-4 relative overflow-hidden">
                 <div className="relative z-10 h-full flex flex-col justify-end">
                   <h3 className="font-bold mb-1">Speakers</h3>
@@ -319,7 +319,7 @@ const Home = () => {
 
       {/* مميزات الخدمة */}
       <section className="container mx-auto px-4 mb-8">
-        <div className="grid grid-cols-3 gap-8 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
           {/* Free and Fast Delivery */}
           <div className="flex flex-col items-center">
             <div className="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center mb-6 relative">
