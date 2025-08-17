@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom responsive image styles */
+@layer components {
+  .responsive-image {
+    @apply w-full h-auto object-cover;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .responsive-image-contain {
+    @apply w-full h-auto object-contain;
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Mobile-first responsive image container */
+  .image-container {
+    @apply relative overflow-hidden;
+    aspect-ratio: 1;
+  }
+  
+  .image-container img {
+    @apply w-full h-full object-cover;
+  }
+  
+  /* Responsive image grid */
+  .image-grid {
+    @apply grid gap-4;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  /* Mobile image optimizations */
+  @media (max-width: 640px) {
+    .mobile-image {
+      @apply w-full h-auto;
+      max-height: 300px;
+    }
+  }
+}

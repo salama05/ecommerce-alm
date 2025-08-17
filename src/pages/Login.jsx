@@ -29,8 +29,8 @@ const Login = () => {
           <div className="flex-1 max-w-md">
             <div className="space-y-8">
               {/* Header */}
-              <div className="space-y-4">
-                <h1 className="text-4xl font-bold text-gray-900">Log in to Exclusive</h1>
+              <div className="space-y-2">
+                <h1 className="text-4xl font-medium text-gray-900">Log in to Exclusive</h1>
                 <p className="text-gray-600">Enter your details below</p>
               </div>
 
@@ -53,10 +53,10 @@ const Login = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-4">
+                <div className="space-y-4 pt-4">
                   <button
                     type="submit"
-                    className="bg-red-500 hover:bg-red-600 text-white font-medium py-4 px-12 rounded transition-colors duration-200"
+                    className="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-4 px-6 rounded"
                     style={{ 
                       display: 'block', 
                       minHeight: '50px', 
@@ -69,13 +69,15 @@ const Login = () => {
                   >
                     Log In
                   </button>
-                  <Link 
-                    to="/forgot-password" 
-                    className="text-red-500 hover:text-red-600 text-sm transition-colors duration-200"
-                    style={{ color: '#ef4444' }}
-                  >
-                    Forgot Password?
-                  </Link>
+                  <div className="text-center">
+                    <Link 
+                      to="/forgot-password" 
+                      className="text-red-500 hover:text-red-600 font-medium transition-colors duration-200"
+                      style={{ color: '#ef4444' }}
+                    >
+                      Forgot Password?
+                    </Link>
+                  </div>
                 </div>
               </form>
             </div>

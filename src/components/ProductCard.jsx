@@ -12,7 +12,7 @@ function ProductCard({ item, sectionTitle }) {
   const { showToast } = useToast();
   return (
     <div className="group border-slate-950 relative mx-auto w-full max-w-[270px] rounded-lg border shadow-lg overflow-hidden">
-      <div className="flex h-[250px] items-center justify-center bg-[#F5F5F5] relative">
+      <div className="flex h-[200px] sm:h-[250px] items-center justify-center bg-[#F5F5F5] relative">
         {/* Discount Badge */}
         {item.saleShow && (
           <div className="absolute left-3 top-3 h-[26px] w-[55px] rounded bg-color-button-2 px-2 py-1 text-center font-poppins text-font-sm-400 text-white">
@@ -31,7 +31,7 @@ function ProductCard({ item, sectionTitle }) {
         <img
           src={item.img}
           alt="HAVIT HV-G92 Gamepad"
-          className="h-[180px] w-[190px] object-cover"
+          className="w-full h-full object-contain p-4 sm:p-2 max-w-[190px] max-h-[180px] sm:max-w-none sm:max-h-none"
         />
 
         {/* Wishlist and View Icons */}

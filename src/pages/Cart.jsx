@@ -30,14 +30,14 @@ const Cart = () => {
           <tbody>
             {items.map((it) => (
               <tr key={it.id} className="border-b text-sm">
-                <td className="p-4 flex items-center gap-4">
-                  <img src={it.img} alt={it.name} className="h-16 w-16 object-cover rounded" />
-                  {it.name}
+                <td className="p-2 sm:p-4 flex items-center gap-2 sm:gap-4">
+                  <img src={it.img} alt={it.name} className="h-12 w-12 sm:h-16 sm:w-16 object-cover rounded" />
+                  <span className="text-xs sm:text-sm">{it.name}</span>
                 </td>
-                <td className="p-4 text-center">${it.price}</td>
-                <td className="p-4 text-center">
+                <td className="p-2 sm:p-4 text-center text-xs sm:text-sm">${it.price}</td>
+                <td className="p-2 sm:p-4 text-center">
                   <select
-                    className="rounded-md border px-3 py-2 mx-auto"
+                    className="rounded-md border px-2 sm:px-3 py-1 sm:py-2 mx-auto text-xs sm:text-sm"
                     value={it.qty}
                     onChange={(e) => updateQty(it.id, e.target.value)}
                   >
@@ -48,8 +48,8 @@ const Cart = () => {
                     ))}
                   </select>
                 </td>
-                <td className="p-4 text-center">${it.price * it.qty}</td>
-                <td className="p-4 text-center">
+                <td className="p-2 sm:p-4 text-center text-xs sm:text-sm">${it.price * it.qty}</td>
+                <td className="p-2 sm:p-4 text-center">
                   <button
                     onClick={() => removeItem(it.id)}
                     className="text-red-500 hover:text-red-700 text-lg"

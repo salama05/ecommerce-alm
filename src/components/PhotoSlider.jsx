@@ -42,8 +42,8 @@ function PhotoSlider() {
         className="mySwiper"
       >
         {sliderImages.map((img, idx) => (
-          <SwiperSlide key={idx} className="flex items-center justify-center h-[344px] bg-black">
-            <img src={img.src} alt={img.alt} className="max-w-[892px] max-h-[344px] object-contain rounded-lg" />
+          <SwiperSlide key={idx} className="flex items-center justify-center h-[200px] sm:h-[344px] bg-black">
+            <img src={img.src} alt={img.alt} className="w-full h-full max-w-full max-h-full object-contain rounded-lg" />
           </SwiperSlide>
         ))}
         <div className="autoplay-progress" slot="container-end">

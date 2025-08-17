@@ -1,12 +1,12 @@
 function Footer() {
   return (
-    <footer className="sm-1000:h-full flex h-[440px] w-full flex-col items-center justify-between bg-black text-white">
+    <footer className="sm-1000:h-full flex min-h-[280px] w-full flex-col items-center justify-between bg-black text-white">
       {/* Container for content */}
-      <div className="sm-1200:px-10 flex w-full max-w-[1170px] flex-wrap justify-between space-x-4">
+      <div className="sm-1200:px-10 flex w-full max-w-[1170px] flex-wrap justify-between gap-x-4 gap-y-8 px-4">
         {/* <div class="  flex justify-between  px-4"> */}
 
         {/* Exclusive Section */}
-        <div className="mt-20 w-[217px]">
+        <div className="mt-20 w-full max-w-[217px] sm-800:w-full">
           <h3 className="text-font-4xl-700 mb-6 break-words font-inter">
             Exclusive
           </h3>
@@ -14,7 +14,7 @@ function Footer() {
           <p className="mb-4 break-words text-font-lg-400">
             Get 10% off your first order
           </p>
-          <div className="relative h-12 w-[217px] rounded-[4px] border-[1.5px] border-white">
+          <div className="relative h-12 w-full max-w-[217px] rounded-[4px] border-[1.5px] border-white">
             <input
               type="email"
               placeholder="Enter your email"
@@ -27,7 +27,7 @@ function Footer() {
         </div>
 
         {/* Support Section */}
-        <div className="mt-20 w-[175px] text-font-lg-400">
+        <div className="mt-20 w-full max-w-[175px] text-font-lg-400 sm-800:w-1/2">
           <h3 className="text-font-2xl-500 mb-6 break-words">Support</h3>
           <p className="mb-4 break-words">
             111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.
@@ -37,7 +37,7 @@ function Footer() {
         </div>
 
         {/* Account Section */}
-        <div className="mt-20 w-[123px] text-font-lg-400">
+        <div className="mt-20 w-full max-w-[123px] text-font-lg-400 sm-800:w-1/2">
           <h3 className="text-font-2xl-500 mb-6 break-words">Account</h3>
           <ul className="">
             <li className="mb-4 break-words">My Account</li>
@@ -49,7 +49,7 @@ function Footer() {
         </div>
 
         {/* Quick Link Section */}
-        <div className="mt-20 w-[109px] text-font-lg-400">
+        <div className="mt-20 w-full max-w-[109px] text-font-lg-400 sm-800:w-1/2">
           <h3 className="text-font-2xl-500 mb-6 break-words">Quick Link</h3>
           <ul className="">
             <li className="mb-4 break-words">Privacy Policy</li>
@@ -60,7 +60,7 @@ function Footer() {
         </div>
 
         {/* Download App Section */}
-        <div className="mt-20 w-[198px]">
+        <div className="mt-20 w-full max-w-[198px] sm-800:w-full">
           <h3 className="text-font-2xl-500 mb-6 break-words">Download App</h3>
           <p className="text-font-sm-500 break-words text-color-star-gray">
             Save $3 with App New User Only
@@ -84,7 +84,7 @@ function Footer() {
               />
             </div>
           </div>
-          <div className="mt-6 flex space-x-6">
+          <div className="mt-6 flex flex-wrap gap-6">
             <a
               href="https://www.facebook.com/"
               className="text-white"
@@ -141,7 +141,7 @@ function Footer() {
 
       {/* Footer Bottom Section */}
       {/* <div className="border-gray-700 text-color-primary2 flex h-16 w-full border-t bg-black text-center text-font-lg-400"> */}
-      <div className="border-gray-700 text-color-primary2 mt-6 flex h-16 w-full items-center justify-center border-t text-center text-font-lg-400">
+      <div className="border-gray-700 text-color-primary2 mt-6 flex min-h-16 w-full items-center justify-center border-t px-4 text-center text-font-lg-400">
         © Copyright 2025 . All rights reserved.
       </div>
     </footer>

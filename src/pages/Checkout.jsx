@@ -79,15 +79,15 @@ const Checkout = () => {
         </div>
 
         {/* Order Summary */}
-        <div className="w-1/2 max-w-md space-y-4 rounded-md border p-6 shadow-sm">
+        <div className="w-full lg:w-1/2 max-w-md space-y-4 rounded-md border p-4 sm:p-6 shadow-sm">
           {[
             { name: "LCD Monitor", price: 650, img: "/src/assets/ProductPhoto/IPS LCD Gaming Monitor.png" },
             { name: "H3 Gamepad", price: 1100, img: "/src/assets/ProductPhoto/HAVIT HV-G92 Gamepad.png" },
           ].map((item) => (
-            <div key={item.name} className="flex items-center justify-between gap-4">
-              <img src={item.img} alt={item.name} className="h-12 w-12 object-cover" />
-              <span className="flex-1 text-sm font-medium">{item.name}</span>
-              <span className="text-sm font-semibold text-gray-900">${item.price}</span>
+            <div key={item.name} className="flex items-center justify-between gap-2 sm:gap-4">
+              <img src={item.img} alt={item.name} className="h-10 w-10 sm:h-12 sm:w-12 object-cover rounded" />
+              <span className="flex-1 text-xs sm:text-sm font-medium">{item.name}</span>
+              <span className="text-xs sm:text-sm font-semibold text-gray-900">${item.price}</span>
             </div>
           ))}
 

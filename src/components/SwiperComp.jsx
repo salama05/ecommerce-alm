@@ -63,6 +63,7 @@ function SwiperComp({ nameList, listName }) {
         direction="next"
         disabled={navState.isEnd}
         onClick={() => swiperRef.current.swiper.slideNext()}
+        classNameOverride="sm-800:hidden"
       />
 
       {/* Previous Button */}
@@ -70,13 +71,14 @@ function SwiperComp({ nameList, listName }) {
         direction="prev"
         disabled={navState.isBeginning}
         onClick={() => swiperRef.current.swiper.slidePrev()}
+        classNameOverride="sm-800:hidden"
       />
     </div>
   );
 }
 
 // Reusable navigation button component
-function NavigationButton({ direction, disabled, onClick }) {
+function NavigationButton({ direction, disabled, onClick, classNameOverride = "" }) {
   const isNext = direction === "next";
   return (
     <button
@@ -86,7 +88,7 @@ function NavigationButton({ direction, disabled, onClick }) {
         isNext ? "right-0" : "right-14"
       } top-[-85px] z-10 flex h-12 w-12 items-center justify-center rounded-full bg-color-second-2 ${
         disabled ? "cursor-not-allowed opacity-50" : "hover:bg-color-star-gray"
-      }`}
+      } ${classNameOverride}`}
     >
       {isNext ? (
         <IoArrowForwardOutline

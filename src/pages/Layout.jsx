@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 const Layout = () => {
   return (
-    <div className="min-h-screen w-screen font-poppins">
+    <div className="min-h-screen w-full overflow-x-hidden font-poppins">
       <TopHeader />
       <Header />
 

@@ -99,17 +99,17 @@ const Product = () => {
         <span className="text-gray-900">{product.name}</span>
       </div>
 
-      <div className="flex flex-col ov-1000:flex-row gap-8 ov-1000:gap-16 items-start">
+      <div className="flex flex-col ov-1000:flex-row gap-4 sm:gap-8 ov-1000:gap-16 items-start">
         {/* Gallery */}
-        <div className="w-full ov-1000:w-1/2 flex gap-4 ov-1000:gap-6">
+        <div className="w-full ov-1000:w-1/2 flex flex-col sm:flex-row gap-4 ov-1000:gap-6">
           {/* Thumbnail Images */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-row sm:flex-col gap-2 sm:gap-4 order-2 sm:order-1">
             {product.images.map((src, i) => (
               <img 
                 key={i} 
                 src={src} 
                 alt={`thumb ${i + 1}`} 
-                className={`w-20 h-20 rounded-md cursor-pointer border-2 object-cover ${
+                className={`w-16 h-16 sm:w-20 sm:h-20 rounded-md cursor-pointer border-2 object-cover ${
                   selectedImage === i ? 'border-black' : 'border-gray-200'
                 }`}
                 onClick={() => setSelectedImage(i)}
@@ -117,11 +117,11 @@ const Product = () => {
             ))}
           </div>
           {/* Main Image */}
-          <div className="flex-1">
+          <div className="flex-1 order-1 sm:order-2">
             <img 
               src={product.images[selectedImage]} 
               alt={product.name} 
-              className="w-full h-[320px] ov-800:h-[420px] ov-1000:h-[500px] rounded-md object-cover bg-gray-50" 
+              className="w-full h-[250px] sm:h-[320px] ov-800:h-[420px] ov-1000:h-[500px] rounded-md object-cover bg-gray-50" 
             />
           </div>
         </div>

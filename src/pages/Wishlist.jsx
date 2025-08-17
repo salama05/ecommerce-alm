@@ -56,9 +56,9 @@ const Wishlist = () => {
       </div>
 
       {/* Wishlist horizontal row */}
-      <div className="flex gap-6 overflow-x-auto pb-4">
+      <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4">
         {items.map((p) => (
-          <div key={p.id} className="group flex-shrink-0 w-64 space-y-2">
+          <div key={p.id} className="group flex-shrink-0 w-48 sm:w-64 space-y-2">
             <div className="relative">
               <button
                 onClick={() => removeItem(p.id)}
@@ -67,7 +67,7 @@ const Wishlist = () => {
                 Remove
               </button>
               <Link to={`/product/${p.id}`}>
-                <img src={p.img} alt={p.name} className="w-full h-48 rounded-md object-cover" />
+                <img src={p.img} alt={p.name} className="w-full h-32 sm:h-48 rounded-md object-cover" />
               </Link>
             </div>
             <p className="truncate text-sm font-medium">{p.name}</p>
@@ -105,14 +105,14 @@ const Wishlist = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="inline-block w-2 h-8 bg-color-button-2 rounded-sm"></span>
-            <h3 className="font-inter text-3xl ov-800:text-4xl font-semibold text-gray-900">Just For You</h3>
+            <h3 className="font-inter text-2xl sm:text-3xl ov-800:text-4xl font-semibold text-gray-900">Just For You</h3>
           </div>
         </div>
-        <div className="flex gap-6 overflow-x-auto pb-4">
+        <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4">
           {suggestions.map((it) => (
-            <div key={it.id} className="group cursor-pointer w-64 flex-shrink-0">
+            <div key={it.id} className="group cursor-pointer w-48 sm:w-64 flex-shrink-0">
               <div className="relative bg-gray-50 rounded-lg p-4 mb-4">
-                <img src={it.img} alt={it.title} className="w-full h-40 object-contain mb-4" />
+                <img src={it.img} alt={it.title} className="w-full h-32 sm:h-40 object-contain mb-4" />
                 <button
                   onClick={() => {
                     addItem({ id: it.id, name: it.title, price: it.priceNow, img: it.img }, 1);

@@ -128,13 +128,13 @@ const Home = () => {
                   >
                     <div className="flex h-full">
                       {/* Left side - Text content */}
-                      <div className="flex-1 flex items-center p-12">
+                      <div className="flex-1 flex items-center p-6 ov-1000:p-12">
                         <div className="animate-fadeIn">
                           <div className="flex items-center gap-4 mb-6">
                             <img src={slide.logo} alt="Apple" className="w-8 h-8 filter invert" />
                             <span className="text-lg">{slide.title}</span>
                           </div>
-                          <h1 className="text-5xl font-bold mb-6 leading-tight whitespace-pre-line">
+                          <h1 className="text-3xl ov-800:text-4xl ov-1000:text-5xl font-bold mb-6 leading-tight whitespace-pre-line">
                             {slide.heading}
                           </h1>
                           <div className="flex items-center gap-2 cursor-pointer hover:text-gray-300 transition-colors">
@@ -210,7 +210,7 @@ const Home = () => {
       {/* Browse By Category */}
       <section className="container mx-auto px-4">
         <SectionTitle>Browse By Category</SectionTitle>
-        <div className="grid grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 ov-800:grid-cols-3 ov-1000:grid-cols-4 ov-1200:grid-cols-6 gap-4">
           {[
             { name: "Phones", image: PhonesImg },
             { name: "Computers", image: ComputersImg },
@@ -276,9 +276,9 @@ const Home = () => {
       {/* New Arrival */}
       <section className="container mx-auto px-4">
         <SectionTitle>New Arrival</SectionTitle>
-        <div className="flex gap-8 h-96">
+        <div className="flex flex-col ov-1000:flex-row gap-8 h-auto ov-1000:h-96">
           {/* PlayStation 5 - Left Side */}
-          <div className="flex-1 bg-black text-white rounded-lg p-8 relative overflow-hidden">
+          <div className="flex-1 bg-black text-white rounded-lg p-6 ov-1000:p-8 relative overflow-hidden min-h-[220px]">
             <div className="relative z-10 h-full flex flex-col justify-end">
               <h3 className="text-3xl font-bold mb-4">PlayStation 5</h3>
               <p className="text-gray-300 mb-6 text-lg">Black and White version of the PS5 coming out on sale.</p>
@@ -292,9 +292,9 @@ const Home = () => {
           </div>
 
           {/* Right Side - Three cards */}
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 space-y-4 min-h-[220px]">
             {/* Women's Collections - Top */}
-            <div className="bg-black text-white rounded-lg p-6 relative overflow-hidden h-44">
+            <div className="bg-black text-white rounded-lg p-6 relative overflow-hidden h-44 ov-1000:h-44">
               <div className="relative z-10 h-full flex flex-col justify-end">
                 <h3 className="text-xl font-bold mb-2">Women's Collections</h3>
                 <p className="text-gray-300 text-sm mb-2">Featured woman collections that give you another vibe.</p>
@@ -307,8 +307,8 @@ const Home = () => {
             </div>
 
             {/* Bottom Row - Two cards side by side */}
-            <div className="grid grid-cols-2 gap-4 h-44">
-              <div className="bg-black text-white rounded-lg p-4 relative overflow-hidden">
+            <div className="grid grid-cols-1 ov-800:grid-cols-2 gap-4 h-auto ov-1000:h-44">
+              <div className="bg-black text-white rounded-lg p-4 relative overflow-hidden h-40 ov-1000:h-auto">
                 <div className="relative z-10 h-full flex flex-col justify-end">
                   <h3 className="font-bold mb-1">Speakers</h3>
                   <p className="text-gray-300 text-xs mb-2">Amazon wireless speakers</p>
@@ -321,12 +321,12 @@ const Home = () => {
                 </div>
               </div>
 
-              <div className="bg-black text-white rounded-lg p-4 relative overflow-hidden">
+              <div className="bg-black text-white rounded-lg p-4 relative overflow-hidden h-40 ov-1000:h-auto">
                 <div className="relative z-10 h-full flex flex-col justify-end">
                   <h3 className="font-bold mb-1">Perfume</h3>
                   <p className="text-gray-300 text-xs mb-2">GUCCI INTENSE OUD EDP</p>
                   <button className="text-white border-b border-white pb-1 w-fit text-xs hover:border-gray-300 transition-colors">
-                    Shop Now
+                      Shop Now
                   </button>
                 </div>
                 <div className="absolute right-0 top-0 h-full w-2/3">
@@ -338,9 +338,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* مميزات الخدمة */}
+      {/* Service features */}
       <section className="container mx-auto px-4 mb-8">
-        <div className="grid grid-cols-3 gap-8 text-center">
+        <div className="grid grid-cols-1 ov-800:grid-cols-3 gap-8 text-center">
           {/* Free and Fast Delivery */}
           <div className="flex flex-col items-center">
             <div className="w-20 h-20 bg-gray-300 rounded-full flex items-center justify-center mb-6 relative">
